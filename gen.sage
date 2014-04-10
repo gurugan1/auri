@@ -31,21 +31,32 @@ def check(filename):
         k = line.find(")")
         line = line[k+1:]
 
+        good = False
         for num in line.split():
             if num.find("/") != -1:
-                if (int(num.split("/")[1])>2):
-                    return False
-            
-    return True
+                x,y = [ int(x) for x in num.split("/")]
+                if (x*3>=y):
+                    good = True
+                    break;
+            else:
+                good = True
+                break
+        if (not good):
+            if (len(line.split())==0):
+                continue
+            print("LINE IS ",line)
+            return False
+    return True 
 
 
 def generate_all( n, output_filename):
-    C7 = graphs.CycleGraph(7).complement()
+    C9 = graphs.CycleGraph(9).complement()
     output = open(output_filename,"w")
     count=0
-    for K in graphs.nauty_geng(str(n)+" -c "):
-        if (K.subgraph_search(C7) is not None):
+    for K in graphs.nauty_geng(str(n)+" -c -d 3 "):
+        if (K.subgraph_search(C9) is not None):
             continue
+        #K = graphs.CycleGraph(9).complement()
         count+=1
         generate_ineq(K)
         if os.path.isfile("current.ieq.poi"):
@@ -56,21 +67,22 @@ def generate_all( n, output_filename):
             print(K.edges(labels=None))
             K.show()
             raw_input("PAUSE")
+        
 
     print("--------Looks like there are no counter examples after trying %d"%count)
 
 
 if __name__=="__main__":
-    #    C = graphs.CycleGraph(9)
-    #generate_all(7)
-    #print(check("current.ieq.poi"))
-    n =10 
-    G = graphs.CompleteGraph(n)
-    for i in xrange(n):
-        G.add_edge(i,i+n)
-        G.add_edge(i+n,2*n)
-    G.show()
-    raw_input("PRESS ENTER")
-    generate_ineq(G)
+    C = graphs.CycleGraph(9)
+    generate_all(10,"output.txt")
+    print(check("current.ieq.poi"))
+    #n = 7 
+    #G = graphs.CompleteGraph(n)
+    #for i in xrange(n):
+    #    G.add_edge(i,i+n)
+    #    G.add_edge(i+n,2*n)
+    #G.show()
+    #raw_input("PRESS ENTER")
+    #generate_ineq(G)
 
 
