@@ -1,0 +1,30 @@
+
+ML - 10-701 Homework 1
+----------------------
+
+File descriptions
+
+LANGFILE - Mention the language you are using in this file - octave/julia/python
+
+Octave Implementation - Fill in the functions logPrior.m, logLikelihood.m and naiveBayesClassify.m
+You can run your code using runNB.m. It's a helper script provided to you.
+
+Julia Implementation - Fill in the code for all the functions in naivebayes.jl. runNB.jl is a
+helper script provided for running the code.
+
+Python Implementation - You need to fill out the code inside the runNB.py file. There
+is minimal support for python. You would have to read in the data files and output the results
+yourself. Your code should be able to run on the autolab servers. So please don't use libraries
+that would not be available on the test sandbox.
+
+
+Input Files
+-----------
+Details mentioned in the homework document.
+
+Output Files
+------------
+logPrior.csv
+logLikelihood.csv
+nbResults.csv
+
