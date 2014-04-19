@@ -22,8 +22,8 @@ end
 
 m = size(E);
 m = m(1);
-display(m);
-display(Y);
+%display(m);
+%display(Y);
 C = zeros(N,N,m);
 for i =1:m
     x = E(i,1);
@@ -34,7 +34,7 @@ for i =1:m
     C(N,N,i) = 1;
     %display(C(:,:,i));
 end
-
+display('Begining CVX');
 cvx_begin
     variable R(N,N)  symmetric;
     maximize trace(R*Y);
@@ -46,7 +46,7 @@ cvx_begin
         end
 cvx_end;
 
-display((ones(1,n) + R(N,1:n))/2);
+%display((ones(1,n) + R(N,1:n))/2);
 ret = R;
 display(cvx_optval)
 end
